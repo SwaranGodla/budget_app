@@ -7,13 +7,13 @@ class OpenSans extends StatelessWidget {
   final size;
   final color;
   final fontWeight;
-  const OpenSans(
-      {Key? key,
-      required this.text,
-      required this.size,
-      this.color,
-      this.fontWeight})
-      : super(key: key);
+  const OpenSans({
+    Key? key,
+    required this.text,
+    required this.size,
+    this.color,
+    this.fontWeight,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,13 @@ class Poppins extends StatelessWidget {
   final size;
   final color;
   final fontWeight;
-  const Poppins(
-      {Key? key,
-      required this.text,
-      required this.size,
-      this.color,
-      this.fontWeight})
-      : super(key: key);
+  const Poppins({
+    Key? key,
+    required this.text,
+    required this.size,
+    this.color,
+    this.fontWeight,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,18 +77,16 @@ class TextForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        OpenSans(
-          size: 13.0,
-          text: text,
-        ),
+        OpenSans(size: 13.0, text: text),
         SizedBox(height: 5.0),
         SizedBox(
           width: containerWidth,
           child: TextFormField(
             validator: validator,
-            inputFormatters: digitsOnly != null
-                ? [FilteringTextInputFormatter.digitsOnly]
-                : [],
+            inputFormatters:
+                digitsOnly != null
+                    ? [FilteringTextInputFormatter.digitsOnly]
+                    : [],
             controller: controller,
             decoration: InputDecoration(
               errorBorder: OutlineInputBorder(
@@ -119,32 +117,28 @@ class TextForm extends StatelessWidget {
 
 DialogBox(BuildContext context, String title) {
   return showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-            actionsAlignment: MainAxisAlignment.center,
-            contentPadding: EdgeInsets.all(32.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              side: BorderSide(width: 2.0, color: Colors.black),
+    context: context,
+    builder:
+        (BuildContext context) => AlertDialog(
+          actionsAlignment: MainAxisAlignment.center,
+          contentPadding: EdgeInsets.all(32.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: BorderSide(width: 2.0, color: Colors.black),
+          ),
+          title: OpenSans(text: title, size: 20.0),
+          actions: [
+            MaterialButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              color: Colors.black,
+              child: OpenSans(text: "Okay", size: 20.0, color: Colors.white),
             ),
-            title: OpenSans(
-              text: title,
-              size: 20.0,
-            ),
-            actions: [
-              MaterialButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0)),
-                color: Colors.black,
-                child: OpenSans(
-                  text: "Okay",
-                  size: 20.0,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ));
+          ],
+        ),
+  );
 }
